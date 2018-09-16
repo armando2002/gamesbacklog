@@ -4,6 +4,8 @@ import logger from 'morgan';
 // imports connect from db.js
 import {connect} from './config/db';
 
+// imports restRouter from '/api/index/js'
+import {restRouter} from './api';
 
 const app = express();
 const PORT = 3000;
@@ -20,7 +22,7 @@ app.get('/', (req, res) => res.json({msg: 'This is the games backlog app.'}));
 // app.use('/', indexRouter);
 
 // for entries that hit '/api' use the backlogRouter (ADD THIS LATER)
-// app.use('/api', backlogRouter);
+app.use('/api', restRouter);
 
 
 app.listen(PORT, () => {
