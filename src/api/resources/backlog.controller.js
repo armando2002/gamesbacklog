@@ -5,7 +5,7 @@ import Backlog from './backlog.model';
 
 export default {
 
-// create action for creating a game in the backlog
+// action for creating a game in the backlog
     async create(req,res){
         // log request body
         console.log(req.body);
@@ -34,12 +34,31 @@ export default {
             return res.status(500).send(err);
         }
     },
-// create action for get all games in the backlog
+// action for get all games in the backlog
     async findAll(req,res){
         try{
             // use a promise to find all games and return as a JSON object
             const backlog = await Backlog.find();
             return res.json(backlog);
+        }
+        catch(err){
+            console.error(err);
+            return res.status(500).send(err);
+        }
+    },
+// action for finding one game
+    async findGame(req,res){
+        try{
+            // use destructuring to grab the ID from the request
+            let {id} = req.params;
+            // use a promise to find a game by ID
+            const game = await Backlog.findById(id);
+            // if there's no game with the ID, show HTTP 404
+            if(!game){
+                return res.status(404).json({err: 'Game not found'});
+            }
+            // return game in response as a JSON object
+            return res.json(game);
         }
         catch(err){
             console.error(err);
