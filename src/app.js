@@ -12,6 +12,9 @@ const PORT = 3000;
 
 connect();
 
+// parse the incoming JSON request for express
+app.use(express.json());
+
 // use morgan middleware for logging
 app.use(logger('dev'));
 
