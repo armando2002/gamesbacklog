@@ -65,13 +65,45 @@ export default {
             return res.status(500).send(err);
         }
     },
-// create action for delete game by ID
+// action for delete game by ID
     async deleteGame(req,res){
         try{
             // use destructuring to grab the ID from the request
-            let {id} = req.params;
-            // use a promise to find and delete the game
-            const game = await Backlog.findByIdAndRemove({_id: id});
+            const {id} = req.params;
+            // use a promise to find and delete a game
+            const game = await Backlog.findOneAndRemove({_id: id});
+            // if there's no song with the ID, show HTTP 404
+            if(!game){
+                return res.status(404).json({err: 'Game not found'});
+            }
+            return res.json(game);
+        }
+        catch(err){
+            console.error(err);
+            return res.status(500).send(err);
+        }
+    },
+// action for updating a game by ID
+    async updateGame(req,res){
+        try{
+            // use destructuring to grab the ID from the request
+            const {id} = req.params;
+            // use Joi to validate that object provided matches schema
+            const schema = Joi.object().keys({
+                title: Joi.string().optional(),
+                platform: Joi.string().optional(),
+                status: Joi.string().optional(),
+                comments: Joi.string().optional(),
+                dateAdded: Joi.string().optional(),
+                lastPlayed: Joi.string().optional()
+            });
+            const {value, error} = Joi.validate(req.body, schema);
+            // if validation is false, use the included error and show HTTP 400
+            if(error && error.details){
+                return res.status(400).json(error);
+            }
+            // use a promise to find and update a game
+            const game = await Backlog.findOneAndUpdate({_id: id}, value, {new: true});
             // if there's no song with the ID, show HTTP 404
             if(!game){
                 return res.status(404).json({err: 'Game not found'});

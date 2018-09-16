@@ -15,4 +15,5 @@ backlogRouter
 backlogRouter
     .route('/:id')
     .get(backlogController.findGame)
-    .delete(backlogController.deleteGame);
+    .delete(backlogController.deleteGame)
+    .put(backlogController.updateGame);
