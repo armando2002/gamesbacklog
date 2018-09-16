@@ -67,6 +67,20 @@ export default {
     },
 // create action for delete game by ID
     async deleteGame(req,res){
-        return res.json({msg: 'Add delete game action and replace this'});
+        try{
+            // use destructuring to grab the ID from the request
+            let {id} = req.params;
+            // use a promise to find and delete the game
+            const game = await Backlog.findByIdAndRemove({_id: id});
+            // if there's no song with the ID, show HTTP 404
+            if(!game){
+                return res.status(404).json({err: 'Game not found'});
+            }
+            return res.json(game);
+        }
+        catch(err){
+            console.error(err);
+            return res.status(500).send(err);
+        }
     }
 };

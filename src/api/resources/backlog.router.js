@@ -14,4 +14,5 @@ backlogRouter
 // create routes for game-specific actions
 backlogRouter
     .route('/:id')
-    .get(backlogController.findGame);
+    .get(backlogController.findGame)
+    .delete(backlogController.deleteGame);
