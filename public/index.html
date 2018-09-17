@@ -1,46 +1,112 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Games Backlog App</title
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <header>
-            <h2>Video Game Backlog App</h2>
-        </header>
-        <body>
-            <p>Keep a backlog and notes for your videogames and stop losing progress.</p>
-        </body>
-        <div>
-            <h4>Login to App</h4>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Video Game Backlog App</title>
+</head>
+
+<body>
+    <!-- header top area -->
+    <header id="top-area" class="grid">
+        <div class="bg-image"></div>
+        <div class="content-wrap">
+            <h1>Video Game Backlog App</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus tenetur molestiae nesciunt esse
+                similique neque sed unde dolores sapiente?</p>
+            <a href="#section-b" class="btn">Read More</a>
         </div>
-        <div>
-            <form>
-                <div class='row'>
-                    <label for="Username">Username</label>
-                    <input type="text">
+    </header>
+
+    <!-- Main area-->
+    <main id="main">
+
+        <!-- Section A-->
+        <section id="section-a" class="grid">
+            <div class="content-wrap">
+                <h2 class="content-title">Video Game Backlog</h2>
+                <div class="content-text">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias fuga expedita facilis nihil atque
+                        nesciunt tempora a, ullam rem ab tenetur, dolore eveniet mollitia. Minima vero autem eius
+                        repellendus distinctio explicabo corporis ipsa? Quos temporibus eius minima quaerat voluptas
+                        distinctio!</p>
                 </div>
-                <div class='row'>
-                    <label for="Password">Password</label>
-                    <input type="text">
-                </div>
-                <div class='row'>
-                    <input type="button" value="Login"
-                    onclick="window.location.href='list.html'"/>
-                </div>
-            </form>
-        </div>
-        <script src="" async defer></script>
-    </body>
+            </div>
+        </section>
+
+        <!-- Section B-->
+        <section id="section-b" class="grid">
+            <ul>
+                <li>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                            alt="">
+                        <div class="card-content">
+                            <h3 id="card-title">Super Mario Bros.</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum hic assumenda est vero ab
+                                totam possimus, ullam consequuntur quidem dolore!</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/163042/pokemon-pokemon-go-mobile-trends-smartphone-163042.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                            alt="">
+                        <div class="card-content">
+                            <h3 id="card-title">Pokemon Go</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum hic assumenda est vero ab
+                                totam possimus, ullam consequuntur quidem dolore!</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                            alt="">
+                        <div class="card-content">
+                            <h3 id="card-title">Mario Kart</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum hic assumenda est vero ab
+                                totam possimus, ullam consequuntur quidem dolore!</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section C-->
+        <section id="section-c" class="grid">
+            <div class="content-wrap">
+                <h2 class="content-title">Add additional games to your backlog here</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eaque qui odio accusantium ullam
+                    fugiat in cumque sit nulla blanditiis?</p>
+            </div>
+        </section>
+
+        <!-- Section D-->
+        <section id="section-d" class="grid">
+            <div class="box">
+                <h2 class="content-title">More Information</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus distinctio alias ad minus eum
+                    error asperiores perferendis facilis dolores eveniet.</p>
+                <p>contact@contact.com</p>
+            </div>
+            <div class="box">
+                <h2 class="content-title">About Me</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, error sint expedita tempora
+                    dignissimos vel, dolorem architecto ducimus officiis laboriosam aliquam similique, beatae nesciunt
+                    cupiditate velit voluptatem. Deleniti, sint non.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer" class="grid">
+        <div>Video Game Backlog App</div>
+        <div>Written By <a href="http://github.com/armando2002/gamesbacklog" target="_blank">Stephen Williams</a></div>
+    </footer>
+</body>
+
 </html>
