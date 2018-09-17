@@ -139,3 +139,44 @@ p {
     color: gray;
     text-decoration: none;
 }
+
+/* Media Query */
+/* if width > 700px */
+@media(min-width: 700px) {
+
+    /* toggle CSS grid and set 4 columns */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr repeat(2, minmax(auto, 25em)) 1fr;
+    }
+
+    /* for elements with content-text class within section A, take up 2 columns instead of 1 */
+    #section-a .content-text {
+        columns: 2;
+        column-gap: 2em;
+    }
+    
+    /* remove top padding from paragraph with content-text class in Section A */
+    #section-a .content-text p {
+        padding-top: 0;
+    }
+
+    /* for elements with content-wrap class and for list in section B, start at 2nd line and end at 4th */
+    .content-wrap,
+    #section-b ul {
+        grid-column: 2/4;
+    }
+
+    /* for lists within section B, set to 3 columns with a gap */
+    #section-b ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 1em;
+    }
+
+    /* for box class and main-footer div, take up 2 columns and span across */
+    .box,
+    #main-footer div {
+        grid-column: span 2;
+    }
+}
