@@ -39,7 +39,103 @@ p {
     margin: .5em 0;
 }
 
+/* hovering over buttons */
 .btn:hover {
+    background: whitesmoke;
+    color: #232323;
+}
+
+/* header top area */
+#top-area {
+    min-height: 450px;
+    color: white;
+}
+
+/* background image in the top area */
+#top-area .bg-image {
+    position: absolute;
+    background: #232323 url('https://images.pexels.com/photos/164354/pexels-photo-164354.jpeg?cs=srgb&dl=architecture-building-business-164354.jpg&fm=jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 450px;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+/* main heading in the top area */
+#top-area h1 {
+    padding-top: 100px;
+    padding-bottom: 0;
+}
+
+/* adds left and right padding to top area and section A */
+#top-area .content-wrap,
+#section-a .content-wrap {
+    padding: 0 1.5em;
+}
+
+/* Section A */
+#section-a {
+    background: whitesmoke;
+    color: #232323;
+    padding-bottom: 2em;
+}
+
+/* Section B */
+#section-b {
+    padding: 2em 1em 1em;
+}
+
+/* remove bullet points and padding from list */
+#section-b ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* add bottom margin to list items and adjust colors */
+#section-b li {
+    margin-bottom: 1em;
     background: white;
     color: #232323;
+}
+
+/* add padding to text within cards */
+.card-content {
+    padding: 1.5em;
+}
+
+/* Section C */
+#section-c {
+    background: white;
+    color: #232323;
+    padding: 2em;
+}
+
+/* Section D Boxes */
+#section-d .box {
+    padding: 2em;
+    color: white;
+}
+
+/* Add light grey background to 1st box */
+#section-d .box:first-child {
+    background: gray;
+}
+
+/* Footer */
+
+#main-footer {
+    padding: 2em;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+/* Change link (a) color in footer */
+#main-footer a {
+    color: gray;
+    text-decoration: none;
 }
