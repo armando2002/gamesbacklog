@@ -15,12 +15,14 @@
     "nodemon": "^1.18.4"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
     "mocha": "^5.2.0"
   },
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node --presets env",
-    "test": "mocha --exit"
+    "test": "mocha --require babel-register --exit"
   },
   "author": "Stephen Williams",
   "license": "ISC",
