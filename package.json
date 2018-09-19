@@ -14,10 +14,13 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node --presets env",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit"
   },
   "author": "Stephen Williams",
   "license": "ISC",
