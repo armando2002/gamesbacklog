@@ -5,11 +5,11 @@ const { app, runServer, closeServer } = require("../src/app");
 
 const expect = chai.expect;
 
+// declare variable for model.js & use mongoose.find to compare IDs
 import Backlog from '../src/api/resources/backlog.model';
 
 chai.use(chaiHttp);
 
-// declare variable for model.js & use mongoose.find to see
 
 
 
