@@ -24,7 +24,7 @@ app.use(logger('dev'));
 app.use('/', express.static('public'));
 
 // for entries that hit '/api' use the backlogRouter
-app.use('/api', restRouter);
+app.use('/gamesapi', restRouter);
 
 
 // commenting this out to try mocha-chai approach with runServer and closeServer promises

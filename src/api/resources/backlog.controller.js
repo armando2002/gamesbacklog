@@ -88,9 +88,11 @@ export default {
         try{
             // use destructuring to grab the ID from the request
             const {id} = req.params;
+            console.log("ID = "+id);
             // use Joi to validate that object provided matches schema
             const schema = Joi.object().keys({
-                title: Joi.string().optional(),
+                _id: Joi.string().required(),
+                title: Joi.string().required(),
                 platform: Joi.string().optional(),
                 status: Joi.string().optional(),
                 comments: Joi.string().optional(),
@@ -98,17 +100,22 @@ export default {
                 lastPlayed: Joi.string().optional()
             });
             const {value, error} = Joi.validate(req.body, schema);
+
+            console.log("Value = "+value.title);
+            console.log("Error is "+error);
+           
             // if validation is false, use the included error and show HTTP 400
             if(error && error.details){
+                console.log("Error found with validation");
                 return res.status(400).json(error);
             }
             // use a promise to find and update a game
             const game = await Backlog.findOneAndUpdate({_id: id}, value, {new: true});
-            // if there's no song with the ID, show HTTP 404
+            // if there's no game with the ID, show HTTP 404
             if(!game){
                 return res.status(404).json({err: 'Game not found'});
             }
-            return res.json(game);
+            return res.status(200).json(game);
         }
         catch(err){
             console.error(err);

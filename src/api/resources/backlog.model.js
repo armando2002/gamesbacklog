@@ -18,6 +18,7 @@ const backlogSchema = new Schema({
     comments: {
         type: String
     },
+    // not using date objects as not filtering/searcing by that
     dateAdded: {
         type: String
     },
