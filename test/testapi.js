@@ -59,9 +59,6 @@ describe("Test CRUD for gamesbacklog API", function() {
             expect(dbOutput.title).to.be.equal(newItem.title);
             // same for ID
             console.log("dbOutput_id = "+dbOutput._id);
-
-            // figure out how to get the single strings to MATCH!!!
-            // let dbID = JSON.stringify(dbOutput._id).toString();
             let dbID = dbOutput._id.toString();
             console.log("dbID = "+dbID);
             expect(dbID).to.be.equal(testResId);
