@@ -5,8 +5,9 @@ function generateGameElement(game) {
     return `
     <li>
                     <div class="card">
-                        <img src="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                            alt="">
+                    <object data="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg" type="image/jpeg">
+                        <img src=${game.imageURL}>
+                    </object>
                         <div class="card-content">
                             <h3 id="card-title">${game.title}</h3>
                             <p>${game.platform}</p>
@@ -41,4 +42,24 @@ function getGames() {
     )
     }
 
+// add game from form
+function addGame() {
+    let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
+    let testGame = {
+        "title": "Kirby Test #2",
+        "platform": "NES",
+        "status": "Test",
+        "imageURL": "https://tinyurl.com/y7gkpqjq"
+    };
+
+    fetch(url, {
+        method: 'post',
+        body: testGame })
+        .then(function(res) {
+            return res.json(res);
+        })
+    }
+
+
 $(getGames);
+$(addGame);

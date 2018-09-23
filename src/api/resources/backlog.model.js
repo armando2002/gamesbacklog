@@ -15,6 +15,9 @@ const backlogSchema = new Schema({
     status: {
         type: String
     },
+    imageURL: {
+      type: String  
+    },
     comments: {
         type: String
     },

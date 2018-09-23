@@ -12,21 +12,30 @@ export default {
         // use a try catch block to catch any exceptions and handle them
         try{
         // use Joi to validate that object provided matches schema
-        const schema = Joi.object().keys({
+
+        // RIGHT NOW THE VALIDATION FOR URL IS TRICKY. IT DOESN'T ALLOW HTTP SO I'M COMMENTING THIS OUT FOR DEBUG
+
+        /* const schema = Joi.object().keys({
             title: Joi.string().required(),
             platform: Joi.string(),
             status: Joi.string(),
+            imageURL: Joi.string().uri(),
             comments: Joi.string(),
             dateAdded: Joi.string(),
             lastPlayed: Joi.string()
         });
-        const {value, error} = Joi.validate(req.body, schema);
+        const _validationOptions = {
+            abortEarly: false,
+            allowUnknown: true,
+            stripUnknown: true
+        };
+        const {value, error} = Joi.validate(req.body, schema, _validationOptions);
         // if validation is false, use the included error and show HTTP 400
         if(error && error.details){
             return res.status(400).json(error);
         }
-        // use the Joi value object with a promise
-        const backlogItem = await Backlog.create(value);
+        // use the Joi value object with a promise */
+        const backlogItem = await Backlog.create(req.body);
         return res.json(backlogItem);
         }
         catch(err){
@@ -95,11 +104,12 @@ export default {
                 title: Joi.string().required(),
                 platform: Joi.string().optional(),
                 status: Joi.string().optional(),
+                imageURL: Joi.string().regex(/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i).optional(),
                 comments: Joi.string().optional(),
                 dateAdded: Joi.string().optional(),
                 lastPlayed: Joi.string().optional()
             });
-            const {value, error} = Joi.validate(req.body, schema);
+            const {value, error} = Joi.validate(req.body, schema, {allowUnknown:true});
 
             console.log("Value = "+value.title);
             console.log("Error is "+error);
