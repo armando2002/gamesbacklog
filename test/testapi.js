@@ -53,15 +53,17 @@ describe("Test CRUD for gamesbacklog API", function() {
             // return the ID from the DB
             return Backlog.findById(testResId);
             })
-        // expect IDs to match
+        // expect response object title and ID to match DB title and ID
         .then(function(dbOutput) {
             // DB title should match RES title
             expect(dbOutput.title).to.be.equal(newItem.title);
             // same for ID
-            console.log(dbOutput._id);
+            console.log("dbOutput_id = "+dbOutput._id);
 
             // figure out how to get the single strings to MATCH!!!
-            let dbID = JSON.stringify(dbOutput._id).toString();
+            // let dbID = JSON.stringify(dbOutput._id).toString();
+            let dbID = dbOutput._id.toString();
+            console.log("dbID = "+dbID);
             expect(dbID).to.be.equal(testResId);
         })
     });
