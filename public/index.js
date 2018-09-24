@@ -51,11 +51,22 @@ function addGame() {
 
     fetch(url, {
         method: 'post',
-        body: testGame })
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(testGame) })
         .then(function(res) {
+            alert("Game added!");
+            location.reload();
             return res.json();
-        })
+        });
     }
 
-
 $(getGames);
+
+// on document ready, when a button (only one for now) is clicked, add a game
+$(document).ready(function() {
+    $(".btn").click(function() {
+        addGame();
+    })
+});

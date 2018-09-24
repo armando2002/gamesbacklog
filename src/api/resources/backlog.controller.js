@@ -23,6 +23,7 @@ export default {
         const {value, error} = Joi.validate(req.body, schema);
         // if validation is false, use the included error and show HTTP 400
         if(error && error.details){
+            console.log("POST failed validation");
             return res.status(400).json(error);
         }
         // use the Joi value object with a promise
