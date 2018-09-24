@@ -33,13 +33,11 @@ function generateGamesList(game) {
 function getGames() {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     fetch(url).then(
-    function(resp){ return resp.json();}
-    ).then(
         function(json) {
-            console.log(json);
-            generateGamesList(json);
+            const gamesList = json.json();
+            generateGamesList(gamesList);
         }
-    )
+    );
     }
 
 // add game from form
@@ -56,7 +54,7 @@ function addGame() {
         method: 'post',
         body: testGame })
         .then(function(res) {
-            return res.json(res);
+            return res.json();
         })
     }
 
