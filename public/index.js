@@ -18,6 +18,8 @@ function generateGameElement(game) {
 function generateGamesList(game) {
     $.each(game, function(index, value) { 
         let gameElement = generateGameElement(value);
+        // debug
+        // console.log("game element = "+ gameElement);
         $('.js-gameUl').append(gameElement);
     });
 }
@@ -28,10 +30,12 @@ function generateGamesList(game) {
 // gather list of games from API and then call generateGamesList function
 function getGames() {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
-    fetch(url).then(
-        function(json) {
-            const gamesList = json.json();
-            generateGamesList(gamesList);
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {
+          // debug
+          //  console.log("list of games from fetch = "+ data);
+            generateGamesList(data);
         }
     );
     }
