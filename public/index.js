@@ -41,7 +41,7 @@ function getGames() {
     }
 
 // add game from form
-function addGame() {
+function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     let testGame = {
         "title": "Kirby Test #2",
@@ -54,7 +54,7 @@ function addGame() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(testGame) })
+        body: JSON.stringify(game) })
         .then(function(res) {
             alert("Game added!");
             location.reload();
@@ -62,11 +62,22 @@ function addGame() {
         });
     }
 
+function addGameButton() {
+    $("#addgame").submit(function() {
+        const formData = {
+            "title": $('#gametitle').val(),
+            "platform": $('#platform').val(),
+            "status": $('#status').val()
+        }
+        addGame(formData);
+    });
+}
+
 $(getGames);
 
-// on document ready, when a button (only one for now) is clicked, add a game
+/* // on document ready, when a button (only one for now) is clicked, add a game
 $(document).ready(function() {
     $(".btn").click(function() {
         addGame();
     })
-});
+}); */
