@@ -54,12 +54,13 @@ function addGame(game) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(game) })
+        body: game })
         .then(function(res) {
             alert("Game added!");
             location.reload();
             return res.json();
-        });
+        })
+        .catch(function(err) { console.log('Error adding game', err); });
     }
 
 function addGameButton() {
@@ -74,6 +75,7 @@ function addGameButton() {
 }
 
 $(getGames);
+$(addGameButton);
 
 /* // on document ready, when a button (only one for now) is clicked, add a game
 $(document).ready(function() {
