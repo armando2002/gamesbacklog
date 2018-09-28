@@ -1,13 +1,9 @@
-
-
 // create an element based off the game
 function generateGameElement(game) {
     return `
     <li>
                     <div class="card">
-                    <object data="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg" type="image/jpeg">
-                        <img src=${game.imageURL}>
-                    </object>
+                    <img src="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg" alt="">
                         <div class="card-content">
                             <h3 id="card-title">${game.title}</h3>
                             <p>${game.platform}</p>
@@ -22,6 +18,8 @@ function generateGameElement(game) {
 function generateGamesList(game) {
     $.each(game, function(index, value) { 
         let gameElement = generateGameElement(value);
+        // debug
+        // console.log("game element = "+ gameElement);
         $('.js-gameUl').append(gameElement);
     });
 }
@@ -32,32 +30,43 @@ function generateGamesList(game) {
 // gather list of games from API and then call generateGamesList function
 function getGames() {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
-    fetch(url).then(
-        function(json) {
-            const gamesList = json.json();
-            generateGamesList(gamesList);
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {
+          // debug
+          //  console.log("list of games from fetch = "+ data);
+            generateGamesList(data);
         }
     );
     }
 
 // add game from form
-function addGame() {
+function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     let testGame = {
         "title": "Kirby Test #2",
         "platform": "NES",
-        "status": "Test",
-        "imageURL": "https://tinyurl.com/y7gkpqjq"
+        "status": "Test"
     };
 
     fetch(url, {
         method: 'post',
-        body: testGame })
+        body: game })
         .then(function(res) {
             return res.json();
         })
+        .catch(function(err) { console.log('Error adding game', err); });
     }
 
+function addGameButton() {
+    $("#addgame").submit(function( event ) {
+        const formData = {
+            "title": $('#gametitle').val(),
+            "platform": $('#platform').val(),
+            "status": $('#status').val()
+        }
+    addGame(formData);
+    });
+}
 
 $(getGames);
-$(addGame);
