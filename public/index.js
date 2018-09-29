@@ -48,6 +48,7 @@ function addGame(game) {
         "platform": "NES",
         "status": "Test"
     };
+    console.log(game);
 
     fetch(url, {
         method: 'post',
@@ -57,7 +58,6 @@ function addGame(game) {
         body: game })
         .then(function(res) {
             alert("Game added!");
-            location.reload();
             return res.json();
         })
         .catch(function(err) { console.log('Error adding game', err); });
