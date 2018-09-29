@@ -41,6 +41,7 @@ function getGames() {
     }
 
 // add game from form
+// This isn't working, I'm getting a 400 and then a success alert
 function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     let testGame = {
@@ -63,8 +64,11 @@ function addGame(game) {
         .catch(function(err) { console.log('Error adding game', err); });
     }
 // this isn't working properly yet, trying form instead of button
+// I want to prevent this button from going anywhere on the page or to a different page, can I use event.preventDefault()?
 function addGameButton() {
-    $("#form").submit(function() {
+    $("#form").submit(function(event) {
+        // added event argument and function below
+        event.preventDefault();
         const formData = {
             "title": $('#gametitle').val(),
             "platform": $('#platform').val(),
