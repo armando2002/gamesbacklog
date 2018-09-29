@@ -56,7 +56,8 @@ function addGame(game) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: game })
+        // adding JSON.stringify to add "" to JS object keys
+        body: JSON.stringify(game)})
         .then(function(res) {
             alert("Game added!");
             return res.json();
