@@ -62,9 +62,9 @@ function addGame(game) {
         })
         .catch(function(err) { console.log('Error adding game', err); });
     }
-
+// this isn't working properly yet, trying form instead of button
 function addGameButton() {
-    $("#addgame").submit(function() {
+    $("#form").submit(function() {
         const formData = {
             "title": $('#gametitle').val(),
             "platform": $('#platform').val(),
