@@ -94,7 +94,7 @@ export default {
             const schema = Joi.object().keys({
                 _id: Joi.string().required(),
                 title: Joi.string().required(),
-                platform: Joi.string().optional(),
+                platform: Joi.string().optional().allow(''),
                 status: Joi.string().optional(),
                 comments: Joi.string().optional(),
                 dateAdded: Joi.string().optional(),

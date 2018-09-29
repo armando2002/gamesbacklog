@@ -60,6 +60,7 @@ function addGame(game) {
         body: JSON.stringify(game)})
         .then(function(res) {
             alert("Game added!");
+            
             return res.json();
         })
         .catch(function(err) { console.log('Error adding game', err); });
