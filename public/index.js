@@ -73,7 +73,10 @@ function addGameButton() {
         const formData = {
             "title": $('#gametitle').val(),
             "platform": $('#platform').val(),
-            "status": $('#status').val()
+            "status": $('#status').val(),
+            "comments": $('#comments').val(),
+            "dateadded": $('#dateadded').val(),
+            "lastplayed": $('#lastplayed').val()
         }
         addGame(formData);
     });
