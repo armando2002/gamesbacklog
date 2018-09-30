@@ -58,7 +58,7 @@ function addGame(game) {
         body: JSON.stringify(game)})
         .then(function(res) {
             // adding toastr alert
-            toastr.success('Success', 'Game has been added.');
+            toastr.success('Game has been added', 'Success');
             // alert("Game added!");
             // get new games list
             getGames();
