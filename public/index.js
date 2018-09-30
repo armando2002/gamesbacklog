@@ -12,7 +12,7 @@ function generateGameElement(game) {
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
                             <p class=".js-gameid">${game._id}</p>
-                            <button type="button" id="deletegamebutton">Delete Game</button>
+                            <p><button type="button" id="deletegamebutton">Delete Game</button></p>
                         </div>
                     </div>
                 </li>
