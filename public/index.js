@@ -18,9 +18,8 @@ function generateGameElement(game) {
 function generateGamesList(game) {
     $.each(game, function(index, value) { 
         let gameElement = generateGameElement(value);
-        // debug
-        // console.log("game element = "+ gameElement);
-        $('.js-gameUl').append(gameElement);
+        // changing from .append to see if possible to changes to appear without F5
+        $('.js-gameUl').html(gameElement);
     });
 }
 
@@ -41,7 +40,6 @@ function getGames() {
     }
 
 // add game from form
-// This isn't working, I'm getting a 400 and then a success alert
 function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     let testGame = {
@@ -60,16 +58,15 @@ function addGame(game) {
         body: JSON.stringify(game)})
         .then(function(res) {
             alert("Game added!");
-            
+            // get new games list
+            getGames();
             return res.json();
         })
         .catch(function(err) { console.log('Error adding game', err); });
     }
-// this isn't working properly yet, trying form instead of button
-// I want to prevent this button from going anywhere on the page or to a different page, can I use event.preventDefault()?
+
 function addGameButton() {
     $("#form").submit(function(event) {
-        // added event argument and function below
         event.preventDefault();
         const formData = {
             "title": $('#gametitle').val(),
@@ -82,10 +79,3 @@ function addGameButton() {
 
 $(getGames);
 $(addGameButton);
-
-/* // on document ready, when a button (only one for now) is clicked, add a game
-$(document).ready(function() {
-    $(".btn").click(function() {
-        addGame();
-    })
-}); */
