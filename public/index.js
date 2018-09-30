@@ -12,6 +12,7 @@ function generateGameElement(game) {
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
                             <p class=".js-gameid">${game._id}</p>
+                            <button type="button" id="deletegamebutton">Delete Game</button>
                         </div>
                     </div>
                 </li>
@@ -86,5 +87,14 @@ function addGameButton() {
     });
 }
 
+function deleteGameButton() {
+    $("#deletegame").submit(function(event) {
+        event.preventDefault();
+        const deleteId = $(event.target).closest("#.js-gameid");
+        console.log(deleteId);
+    });
+}
+
 $(getGames);
 $(addGameButton);
+$(deleteGameButton);
