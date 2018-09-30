@@ -16,10 +16,10 @@ function generateGameElement(game) {
 
 // for each game create an element and add to the page
 function generateGamesList(game) {
+    $('.js-gameUl').html('');
     $.each(game, function(index, value) { 
         let gameElement = generateGameElement(value);
-        // changing from .append to see if possible to changes to appear without F5
-        $('.js-gameUl').html(gameElement);
+        $('.js-gameUl').append(gameElement);
     });
 }
 
