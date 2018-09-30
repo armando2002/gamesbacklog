@@ -5,8 +5,9 @@ function generateGameElement(game) {
                     <div class="card">
                     <img src="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg" alt="">
                         <div class="card-content">
-                            <h3 id="card-title">${game.title}</h3>
+                            <h3 id="card-title">Title: ${game.title}</h3>
                             <p>${game.platform}</p>
+                            <p>${game.status}</p>
                             <p>${game.status}</p>
                         </div>
                     </div>
