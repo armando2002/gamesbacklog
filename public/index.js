@@ -88,8 +88,8 @@ function addGameButton() {
 }
 
 function deleteGameButton() {
-    $("#deletegame").submit(function(event) {
-        event.preventDefault();
+    $("#deletegame").click(function() {
+        console.log("Button clicked");
         const deleteId = $(event.target).closest("#.js-gameid");
         console.log(deleteId);
     });
