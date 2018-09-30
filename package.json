@@ -12,7 +12,8 @@
     "joi": "^13.6.0",
     "mongoose": "^5.2.15",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",

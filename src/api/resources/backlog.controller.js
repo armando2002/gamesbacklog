@@ -14,15 +14,18 @@ export default {
         // use Joi to validate that object provided matches schema
         const schema = Joi.object().keys({
             title: Joi.string().required(),
-            platform: Joi.string(),
-            status: Joi.string(),
-            comments: Joi.string(),
-            dateAdded: Joi.string(),
-            lastPlayed: Joi.string()
+            platform: Joi.string().allow(''),
+            status: Joi.string().allow(''),
+            comments: Joi.string().allow(''),
+            dateAdded: Joi.string().allow(''),
+            lastPlayed: Joi.string().allow('')
         });
         const {value, error} = Joi.validate(req.body, schema);
+        console.log("Joi validated object = " + value);
+        console.log("Joi error = " + error);
         // if validation is false, use the included error and show HTTP 400
         if(error && error.details){
+            console.log("POST failed validation");
             return res.status(400).json(error);
         }
         // use the Joi value object with a promise
@@ -93,14 +96,14 @@ export default {
             const schema = Joi.object().keys({
                 _id: Joi.string().required(),
                 title: Joi.string().required(),
-                platform: Joi.string().optional(),
-                status: Joi.string().optional(),
-                comments: Joi.string().optional(),
-                dateAdded: Joi.string().optional(),
-                lastPlayed: Joi.string().optional()
+                platform: Joi.string().allow(''),
+                status: Joi.string().allow(''),
+                comments: Joi.string().allow(''),
+                dateAdded: Joi.string().allow(''),
+                lastPlayed: Joi.string().allow('')
             });
             const {value, error} = Joi.validate(req.body, schema);
-
+            // ERROR: These don't seem to be showing in the console, so the 400 error is hard to determine.
             console.log("Value = "+value.title);
             console.log("Error is "+error);
            

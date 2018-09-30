@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="index.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Video Game Backlog App</title>
@@ -19,7 +21,6 @@
             <h1>Video Game Backlog App</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus tenetur molestiae nesciunt esse
                 similique neque sed unde dolores sapiente?</p>
-            <a href="#section-b" class="btn">Read More</a>
         </div>
     </header>
 
@@ -83,9 +84,16 @@
         <!-- Section C-->
         <section id="section-c" class="grid">
             <div class="content-wrap">
-                <h2 class="content-title">Add additional games to your backlog here</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eaque qui odio accusantium ullam
-                    fugiat in cumque sit nulla blanditiis?</p>
+                <h2 class="content-title">Add additional games to your backlog here:</h2>
+                <form id="addgameform">
+                    Game Title: <input type="text" id="gametitle"><br>
+                    Platform: <input type="text" id="platform"><br>
+                    Status: <input type="text" id="status"><br>
+                    Comments: <input type="text" id="comments"><br>
+                    Date Added: <input type="text" id="dateadded"><br>
+                    Last Played: <input type="text" id="lastplayed"><br>
+                    <button type="submit" id="addgame">Add Game</button>
+                </form>
             </div>
         </section>
 
