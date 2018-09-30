@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="index.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link href="toastr.css" rel="stylesheet"/>
+    <script src="toastr.js"></script>
     <title>Video Game Backlog App</title>
 </head>
 
@@ -83,13 +85,19 @@
         <section id="section-c" class="grid">
             <div class="content-wrap">
                 <h2 class="content-title">Add additional games to your backlog here:</h2>
-                <form id="form">
+                <form id="addgameform">
                     Game Title:<br>
                     <input type="text" id="gametitle"><br>
                     Platform:<br>
                     <input type="text" id="platform"><br>
                     Status:<br>
                     <input type="text" id="status"><br>
+                    Comments:<br>
+                    <input type="text" id="gametitle"><br>
+                    Date Added:<br>
+                    <input type="text" id="gametitle"><br>
+                    Last Played:<br>
+                    <input type="text" id="gametitle"><br>
                     <button type="submit" id="addgame">Add Game</button>
                 </form>
             </div>

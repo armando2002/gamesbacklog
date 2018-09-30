@@ -57,7 +57,9 @@ function addGame(game) {
         // adding JSON.stringify to add "" to JS object keys
         body: JSON.stringify(game)})
         .then(function(res) {
-            alert("Game added!");
+            // adding toastr alert
+            toastr.success('Success', 'Game has been added.');
+            // alert("Game added!");
             // get new games list
             getGames();
             return res.json();
@@ -66,7 +68,7 @@ function addGame(game) {
     }
 
 function addGameButton() {
-    $("#form").submit(function(event) {
+    $("#addgameform").submit(function(event) {
         event.preventDefault();
         const formData = {
             "title": $('#gametitle').val(),
