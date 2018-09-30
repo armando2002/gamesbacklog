@@ -5,10 +5,12 @@ function generateGameElement(game) {
                     <div class="card">
                     <img src="https://images.pexels.com/photos/163114/mario-luigi-figures-funny-163114.jpeg" alt="">
                         <div class="card-content">
-                            <h3 id="card-title">Title: ${game.title}</h3>
-                            <p>${game.platform}</p>
-                            <p>${game.status}</p>
-                            <p>${game.status}</p>
+                            <h3 id="card-title">${game.title}</h3>
+                            <p>Platform: ${game.platform}</p>
+                            <p>Status: ${game.status}</p>
+                            <p>Comments: ${game.comments}</p>
+                            <p>Date Added: ${game.dateAdded}</p>
+                            <p>Last Played: ${game.lastPlayed}</p>
                         </div>
                     </div>
                 </li>
