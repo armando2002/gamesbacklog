@@ -75,8 +75,8 @@ function addGameButton() {
             "platform": $('#platform').val(),
             "status": $('#status').val(),
             "comments": $('#comments').val(),
-            "dateadded": $('#dateadded').val(),
-            "lastplayed": $('#lastplayed').val()
+            "dateAdded": $('#dateadded').val(),
+            "lastPlayed": $('#lastplayed').val()
         }
         addGame(formData);
     });
