@@ -88,7 +88,7 @@ function addGameButton() {
 }
 
 function deleteGameButton() {
-    $("#deletegame").click(function() {
+    $("#deletegamebutton").click(function() {
         console.log("Button clicked");
         const deleteId = $(event.target).closest("#.js-gameid");
         console.log(deleteId);
