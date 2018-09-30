@@ -19,7 +19,7 @@ img {
 /* for headings, zero out margin and add 1 em of padding on top and bottom and 0 on left and right */
 h1, h2, h3 {
     margin: 0;
-    padding: .1em 0;
+    padding: 1em 0;
 }
 
 /* for paragraphs, zero out margin and add 1 em of padding on top and bottom and 0 on left and right */
