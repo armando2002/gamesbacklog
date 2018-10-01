@@ -40,6 +40,13 @@ function getGames() {
           // debug
           //  console.log("list of games from fetch = "+ data);
             generateGamesList(data);
+            // event listener for delete game button
+            $(".deletegamebutton").on("click", function() {
+                console.log("Button clicked");
+                const deleteId = $(event.target).closest(".js-gameid");
+                console.log(deleteId);
+            });
+            
         }
     );
     }
@@ -86,12 +93,6 @@ function addGameButton() {
         addGame(formData);
     });
 }
-
-    $(".deletegamebutton").on("click", function() {
-        console.log("Button clicked");
-        const deleteId = $(event.target).closest(".js-gameid");
-        console.log(deleteId);
-    });
 
 $(getGames);
 $(addGameButton);
