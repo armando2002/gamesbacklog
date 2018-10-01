@@ -43,7 +43,7 @@ function getGames() {
             // event listener for delete game button
             $(".deletegamebutton").on("click", function() {
                 console.log("Button clicked");
-                const deleteId = $(this).closest(".js-gameid");
+                const deleteId = $(this).prev("p");
                 console.log("The ID is: " + deleteId);
             });
             
