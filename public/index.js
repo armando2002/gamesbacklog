@@ -16,7 +16,7 @@ function generateGameElement(game) {
                             <p>Comments: ${game.comments}</p>
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
-                            <p class=".js-gameid">This is where the game ID would go</p>
+                            <p class="js-gameid">This is where the game ID would go</p>
                             <p><button type="button" class="deletegamebutton">Delete Game</button></p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ function getGames() {
             // event listener for delete game button
             $(".deletegamebutton").on("click", function() {
                 console.log("Button clicked");
-                const deleteId = $(this).prev("p");
+                const deleteId = $(this).closest(".js-gameid");;
                 console.log(deleteId);
             });
             
