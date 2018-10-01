@@ -41,10 +41,10 @@ function getGames() {
           //  console.log("list of games from fetch = "+ data);
             generateGamesList(data);
             // event listener for delete game button
-            $(".deletegamebutton").on("click", function() {
+            $(".deletegamebutton").on("click", function(event) {
                 console.log("Button clicked");
                 const deleteId = $(event.target).closest(".js-gameid");
-                console.log(deleteId);
+                console.log("The ID is: " + deleteId);
             });
             
         }
