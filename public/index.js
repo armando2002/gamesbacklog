@@ -49,7 +49,7 @@ function getGames() {
             $(".deletegamebutton").on("click", function() {
                 console.log("Button clicked");
                 const deleteId = $(this).prev("p");
-                console.log("The ID is: " + deleteId.toString());
+                console.log(deleteId);
             });
             
         }
