@@ -1,7 +1,8 @@
 // create an element based off the game
 function generateGameElement(game) {
     // debug for game ID
-    console.log(`The Game ID is: ${game._id}`);
+    var idType = typeof $(game._id);
+    console.log("ID is a " + idType);
     return `
     <li>
                     <div class="card">
