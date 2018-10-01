@@ -44,7 +44,7 @@ function getGames() {
             $(".deletegamebutton").on("click", function() {
                 console.log("Button clicked");
                 const deleteId = $(this).prev("p");
-                console.log("The ID is: " + deleteId);
+                console.log("The ID is: " + deleteId.toStr());
             });
             
         }
