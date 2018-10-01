@@ -3,6 +3,7 @@ function generateGameElement(game) {
     // debug for game ID
     var idType = typeof $(game._id);
     console.log("ID is a " + idType);
+    console.log(`${game._id}`);
     console.log($(game._id));
     return `
     <li>
