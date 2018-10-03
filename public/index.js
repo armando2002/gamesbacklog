@@ -16,7 +16,7 @@ function generateGameElement(game) {
                             <p>Comments: ${game.comments}</p>
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
-                            <p class="js-gameid">${game._id}</p>
+                            <p class="js-gameid hiddenid">${game._id}</p>
                             <p><button type="button" class="deletegamebutton btn">Delete Game</button></p>
                         </div>
                     </div>

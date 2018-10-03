@@ -107,6 +107,11 @@ p {
     padding: .5em;
 }
 
+/* hide IDs from cards */
+.hiddenid {
+    display: none;
+}
+
 /* Section C */
 #section-c {
     background: white;
