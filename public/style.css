@@ -25,7 +25,7 @@ h1, h2, h3 {
 /* for paragraphs, zero out margin and add 1 em of padding on top and bottom and 0 on left and right */
 p {
     margin: 0;
-    padding: 1em 0;
+    padding: .2em 0;
 }
 
 /* for buttons, set as inline block so they don't overlap and also still don't take up the whole column */
