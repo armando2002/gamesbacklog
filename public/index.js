@@ -47,24 +47,30 @@ function getGames() {
             generateGamesList(data);
             // event listener for delete game button
             $(".deletegamebutton").on("click", function() {
-                console.log("Button clicked");
+
+                // delete game using Fetch
                 const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
-                console.log(deleteId);
+                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
+                fetch(url, {
+                    method: 'delete'
+                    }
+                    .then(function(res) {
+                        toastr.success('Game has been deleted', 'Success');
+                        getGames();
+                        return res.json();
+                    })
+                    .catch(function(err) { 
+                        console.log('Error deleting game', err); 
+                    })
+                )
+                
             });
             
         }
-    );
-    }
 
 // add game from form
 function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
-    let testGame = {
-        "title": "Kirby Test #2",
-        "platform": "NES",
-        "status": "Test"
-    };
-    console.log(game);
 
     fetch(url, {
         method: 'post',
@@ -84,6 +90,7 @@ function addGame(game) {
         .catch(function(err) { console.log('Error adding game', err); });
     }
 
+// add game on form completion and button click
 function addGameButton() {
     $("#addgameform").submit(function(event) {
         event.preventDefault();
@@ -99,5 +106,6 @@ function addGameButton() {
     });
 }
 
+/* add init function for listeners */
 $(getGames);
 $(addGameButton);
