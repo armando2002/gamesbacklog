@@ -53,7 +53,7 @@ function getGames() {
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
                 fetch(url, {
                     method: 'delete'
-                    }
+                    })
                     .then(function(res) {
                         toastr.success('Game has been deleted', 'Success');
                         getGames();
@@ -62,11 +62,11 @@ function getGames() {
                     .catch(function(err) { 
                         console.log('Error deleting game', err); 
                     })
-                )
                 
             });
             
-        }
+        })
+    }
 
 // add game from form
 function addGame(game) {
