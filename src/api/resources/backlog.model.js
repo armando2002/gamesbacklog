@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 // use destructuring to grab the Schema class from mongoose
 const {Schema} = mongoose;
 
+// look into serializing object/model to send N/A such as 'Platform: N/A'
+
 // schema for DB model based on wireframes
 const backlogSchema = new Schema({
     title: {

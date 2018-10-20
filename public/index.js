@@ -1,5 +1,10 @@
 // create an element based off the game
 function generateGameElement(game) {
+    // debug for game ID
+    /* var idType = typeof $(game._id);
+    console.log("ID is a " + idType);
+    console.log(`${game._id}`);
+    console.log($(game._id)); */
     return `
     <li>
                     <div class="card">
@@ -11,7 +16,8 @@ function generateGameElement(game) {
                             <p>Comments: ${game.comments}</p>
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
-                            <p class=".js-gameid">${game._id}</p>
+                            <p class="js-gameid hiddenid">${game._id}</p>
+                            <p><button type="button" class="deletegamebutton btn">Delete Game</button></p>
                         </div>
                     </div>
                 </li>
@@ -39,19 +45,32 @@ function getGames() {
           // debug
           //  console.log("list of games from fetch = "+ data);
             generateGamesList(data);
-        }
-    );
+            // event listener for delete game button
+            $(".deletegamebutton").on("click", function() {
+
+                // delete game using Fetch
+                const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
+                fetch(url, {
+                    method: 'delete'
+                    })
+                    .then(function(res) {
+                        toastr.success('Game has been deleted', 'Success');
+                        getGames();
+                        return res.json();
+                    })
+                    .catch(function(err) { 
+                        console.log('Error deleting game', err); 
+                    })
+                
+            });
+            
+        })
     }
 
 // add game from form
 function addGame(game) {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
-    let testGame = {
-        "title": "Kirby Test #2",
-        "platform": "NES",
-        "status": "Test"
-    };
-    console.log(game);
 
     fetch(url, {
         method: 'post',
@@ -71,6 +90,7 @@ function addGame(game) {
         .catch(function(err) { console.log('Error adding game', err); });
     }
 
+// add game on form completion and button click
 function addGameButton() {
     $("#addgameform").submit(function(event) {
         event.preventDefault();
@@ -86,5 +106,6 @@ function addGameButton() {
     });
 }
 
+/* add init function for listeners */
 $(getGames);
 $(addGameButton);
