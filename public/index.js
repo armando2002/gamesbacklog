@@ -18,7 +18,7 @@ function generateGameElement(game) {
                             <p>Last Played: ${game.lastPlayed}</p>
                             <p class="js-gameid hiddenid">${game._id}</p>
 
-                            <form id="modify">
+                            <form class="modify">
                                 <input type="hidden" name="id" value="${game._id}">
                                 <input type="hidden" name="title" value="${game.title}">
                                 <input type="submit" class="editgamebutton btn" id="edit" value="Edit Game">
@@ -48,15 +48,37 @@ function getGames() {
     fetch(url)
     .then((resp) => resp.json())
     .then(function(data) {
-          // debug
-          //  console.log("list of games from fetch = "+ data);
+
             generateGamesList(data);
 
-            // form event listener (for delete and edit)
-            $('#modify').on('submit', function (event) {
+            // form event listener (for delete and edit), needs to be here as games are added to DOM
+            $('.modify').on('submit', function (event) {
                 event.preventDefault()
+                // vars for delete function
+                const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
+                // grab the clicked button id
                 let id = $(document.activeElement).attr('id')
-                console.log(id)
+
+                if (id == 'edit')
+                {
+                    // need to add a popup modal that takes over the screen, is prepopulated with the game info, and allows the user to PUT changes
+                    console.log("This is the edit button");
+                }
+                else {
+                    // delete game using Fetch
+                    fetch(url, {
+                        method: 'delete'
+                        })
+                        .then(function(res) {
+                            toastr.success('Game has been deleted', 'Success');
+                            getGames();
+                            return res.json();
+                        })
+                        .catch(function(err) { 
+                            console.log('Error deleting game', err); 
+                    })
+                }
               });
 
             // event listener for delete game button, commenting out to try using form instead for edit/delete
