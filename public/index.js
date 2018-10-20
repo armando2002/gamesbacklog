@@ -21,8 +21,8 @@ function generateGameElement(game) {
                             <form id="modify">
                                 <input type="hidden" name="id" value="${game._id}">
                                 <input type="hidden" name="title" value="${game.title}">
-                                <input type="submit" class="editgamebutton btn">Edit Game
-                                <input type="submit" class="deletegamebutton btn">Delete Game
+                                <input type="submit" class="editgamebutton btn">Edit Game</input>
+                                <input type="submit" class="deletegamebutton btn">Delete Game</input>
                             </form>
                         </div>
                     </div>
