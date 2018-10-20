@@ -21,8 +21,8 @@ function generateGameElement(game) {
                             <form id="modify">
                                 <input type="hidden" name="id" value="${game._id}">
                                 <input type="hidden" name="title" value="${game.title}">
-                                <input type="submit" class="editgamebutton btn">Edit Game</input>
-                                <input type="submit" class="deletegamebutton btn">Delete Game</input>
+                                <input type="submit" class="editgamebutton btn" value="Edit Game">
+                                <input type="submit" class="deletegamebutton btn" value="Delete Game">
                             </form>
                         </div>
                     </div>
@@ -54,6 +54,7 @@ function getGames() {
 
             // form event listener (for delete and edit)
             $("#modify").submit(function(event) {
+                event.preventDefault();
                 console.log(event.currentTarget);
             });
 
