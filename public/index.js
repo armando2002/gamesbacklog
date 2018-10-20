@@ -53,10 +53,11 @@ function getGames() {
             generateGamesList(data);
 
             // form event listener (for delete and edit)
-            $("#modify").submit(function(event) {
-                event.preventDefault();
-                console.log(event.currentTarget.id);
-            });
+            $('#modify').on('submit', function (event) {
+                event.preventDefault()
+                let id = $(document.activeElement).attr('id')
+                console.log(id)
+              });
 
             // event listener for delete game button, commenting out to try using form instead for edit/delete
            /*  $(".deletegamebutton").on("click", function() {
