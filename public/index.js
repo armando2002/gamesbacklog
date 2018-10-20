@@ -1,3 +1,6 @@
+// import vanilla-modal
+const VanillaModal = require('vanilla-modal');
+
 // create an element based off the game
 function generateGameElement(game) {
     // debug for game ID
@@ -24,6 +27,23 @@ function generateGameElement(game) {
                                 <input type="submit" class="editgamebutton btn" id="edit" value="Edit Game">
                                 <input type="submit" class="deletegamebutton btn" id="delete" value="Delete Game">
                             </form>
+
+                            <!-- Probably need to add the modal form here, maybe something like:
+                            <modal>
+                                <form>
+                                    <h3 id="card-title">${game.title}</h3>
+                                    <p>Platform: ${game.platform}</p>
+                                    <p>Status: ${game.status}</p>
+                                    <p>Comments: ${game.comments}</p>
+                                    <p>Date Added: ${game.dateAdded}</p>
+                                    <p>Last Played: ${game.lastPlayed}</p>
+                                    <p class="js-gameid hiddenid">${game._id}</p>
+                                    <input type="button" value="Cancel" class="btn" id="cancelbutton">
+                                    <input type="button" value="Save" class="btn" id="savebutton">
+                                </form>
+                            </modal>
+                            -->
+
                         </div>
                     </div>
                 </li>
@@ -64,6 +84,8 @@ function getGames() {
                 {
                     // need to add a popup modal that takes over the screen, is prepopulated with the game info, and allows the user to PUT changes
                     console.log("This is the edit button");
+                    // pop up modal
+
                 }
                 else {
                     // delete game using Fetch
@@ -80,26 +102,6 @@ function getGames() {
                     })
                 }
               });
-
-            // event listener for delete game button, commenting out to try using form instead for edit/delete
-           /*  $(".deletegamebutton").on("click", function() {
-
-                // delete game using Fetch
-                const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
-                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
-                fetch(url, {
-                    method: 'delete'
-                    })
-                    .then(function(res) {
-                        toastr.success('Game has been deleted', 'Success');
-                        getGames();
-                        return res.json();
-                    })
-                    .catch(function(err) { 
-                        console.log('Error deleting game', err); 
-                    })
-                
-            }); */
             
         })
     }
