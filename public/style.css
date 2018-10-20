@@ -139,8 +139,8 @@ p {
     text-align: center;
 }
 
-/* Change link (a) color in footer */
-#main-footer a {
+/* Change link (a) color */
+a {
     color: gray;
     text-decoration: none;
 }
