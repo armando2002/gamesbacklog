@@ -17,7 +17,13 @@ function generateGameElement(game) {
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
                             <p class="js-gameid hiddenid">${game._id}</p>
-                            <p><button type="button" class="deletegamebutton btn">Delete Game</button></p>
+
+                            <form id="modify">
+                                <input type="hidden" name="id" value="${game._id}">
+                                <input type="hidden" name="title" value="${game.title}">
+                                <input type="submit" class="editgamebutton btn">Edit Game
+                                <input type="submit" class="deletegamebutton btn">Delete Game
+                            </form>
                         </div>
                     </div>
                 </li>
@@ -45,8 +51,14 @@ function getGames() {
           // debug
           //  console.log("list of games from fetch = "+ data);
             generateGamesList(data);
-            // event listener for delete game button
-            $(".deletegamebutton").on("click", function() {
+
+            // form event listener (for delete and edit)
+            $("#modify").submit(function(event) {
+                console.log(event.currentTarget);
+            });
+
+            // event listener for delete game button, commenting out to try using form instead for edit/delete
+           /*  $(".deletegamebutton").on("click", function() {
 
                 // delete game using Fetch
                 const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
@@ -63,7 +75,7 @@ function getGames() {
                         console.log('Error deleting game', err); 
                     })
                 
-            });
+            }); */
             
         })
     }
