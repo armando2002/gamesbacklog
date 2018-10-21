@@ -70,7 +70,7 @@ function getGames() {
 
             // form event listener (for delete and edit), needs to be here as games are added to DOM
             $('.modify').on('submit', function (event) {
-                event.preventDefault()
+                event.preventDefault();
                 // vars for delete function
                 const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
                 console.log(deleteId);
@@ -83,7 +83,7 @@ function getGames() {
                     // need to add a popup modal that takes over the screen, is prepopulated with the game info, and allows the user to PUT changes
                     console.log("This is the edit button");
                     // pop up modal
-
+                    modal.style.display = 'block';
                 }
                 else {
                     // delete game using Fetch
@@ -102,22 +102,19 @@ function getGames() {
                 }
               });
 
-            // just testing the modal, not sure how to deal with dynamic IDs for each game
-            // trying class per Jim's suggestion
+            // form event listener for modal (PUT)
+            $('.modal-form').on('submit', function(event) {
+                event.preventDefault();
+                console.log("Form submitted");
+            });
+
+            // create vars for modal and cancel button
             var modal = document.getElementsByClassName('modal')[0];
-            var editBtn = document.getElementsByClassName('editgamebutton')[0];
-            console.log(editBtn);
             var cancelBtn = document.getElementsByClassName('cancelBtn')[0];
 
-            // listen for clicks to Edit
-            editBtn.addEventListener('click', openModal);
+            // listen for clicks to cancel button, and outside of modal
             cancelBtn.addEventListener('click', closeModal);
             window.addEventListener('click', clickOutside);
-
-            // open Edit modal
-            function openModal(){
-                modal.style.display = 'block';
-            }
 
             // close modal
             function closeModal(){
