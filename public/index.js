@@ -1,13 +1,5 @@
-// import vanilla-modal
-const VanillaModal = require('vanilla-modal');
-
-// create an element based off the game
+// create an element based off the game, including the modal for editing game
 function generateGameElement(game) {
-    // debug for game ID
-    /* var idType = typeof $(game._id);
-    console.log("ID is a " + idType);
-    console.log(`${game._id}`);
-    console.log($(game._id)); */
     return `
     <li>
                     <div class="card">
@@ -28,21 +20,26 @@ function generateGameElement(game) {
                                 <input type="submit" class="deletegamebutton btn" id="delete" value="Delete Game">
                             </form>
 
-                            <!-- Probably need to add the modal form here, maybe something like:
-                            <modal>
-                                <form>
-                                    <h3 id="card-title">${game.title}</h3>
-                                    <p>Platform: ${game.platform}</p>
-                                    <p>Status: ${game.status}</p>
-                                    <p>Comments: ${game.comments}</p>
-                                    <p>Date Added: ${game.dateAdded}</p>
-                                    <p>Last Played: ${game.lastPlayed}</p>
-                                    <p class="js-gameid hiddenid">${game._id}</p>
-                                    <input type="button" value="Cancel" class="btn" id="cancelbutton">
-                                    <input type="button" value="Save" class="btn" id="savebutton">
-                                </form>
-                            </modal>
-                            -->
+                            <div id="editModal" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2>Game Editor</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="modal-form">
+                                            Title: <input type="text" value="${game.title}">
+                                            Platform: <input type="text" value="${game.platform}">
+                                            Status: <input type="text" value="${game.status}">
+                                            Comments: <input type="text" value="${game.comments}">
+                                            Date Added: <input type="text" value="${game.dateAdded}">
+                                            Last Played: <input type="text" value="${game.lastPlayed}">
+                                            <input type ="hidden" class="js-gameid hiddenid" value="${game._id}">
+                                            <input type="button" value="Cancel" class="btn cancelBtn" id="cancelBtn">
+                                            <input type="submit" value="Save" class="btn" id="saveBtn">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -76,6 +73,7 @@ function getGames() {
                 event.preventDefault()
                 // vars for delete function
                 const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                console.log(deleteId);
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
                 // grab the clicked button id
                 let id = $(document.activeElement).attr('id')
@@ -89,6 +87,7 @@ function getGames() {
                 }
                 else {
                     // delete game using Fetch
+                    // doesn't seem to throw the catch if there's an error
                     fetch(url, {
                         method: 'delete'
                         })
@@ -102,8 +101,37 @@ function getGames() {
                     })
                 }
               });
-            
-        })
+
+            // just testing the modal, not sure how to deal with dynamic IDs for each game
+            // trying class per Jim's suggestion
+            var modal = document.getElementsByClassName('modal')[0];
+            var editBtn = document.getElementsByClassName('editgamebutton')[0];
+            console.log(editBtn);
+            var cancelBtn = document.getElementsByClassName('cancelBtn')[0];
+
+            // listen for clicks to Edit
+            editBtn.addEventListener('click', openModal);
+            cancelBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', clickOutside);
+
+            // open Edit modal
+            function openModal(){
+                modal.style.display = 'block';
+            }
+
+            // close modal
+            function closeModal(){
+                modal.style.display = 'none';
+            }
+
+            // close modal if outside clicked
+            function clickOutside(e){
+                if(e.target == modal){
+                    modal.style.display = 'none';
+                }
+            }
+                        
+       })
     }
 
 // add game from form
