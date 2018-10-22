@@ -56,9 +56,6 @@ function generateGamesList(game) {
     });
 }
 
-
-
-
 // gather list of games from API and then call generateGamesList function
 function getGames() {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
@@ -102,7 +99,7 @@ function getGames() {
                 }
               });
 
-            // form event listener for modal (PUT) and update function (I'd like to take this function outside of the event listener, but I'm stumped on how to pass the unique URL with ID that is needed)
+            // form event listener for modal (PUT) and update function (I'd like to take the update function outside of the event listener, but I'm stumped on how to pass the unique URL with ID that is needed)
             $('.modal-form').on('submit', function(event) {
                 event.preventDefault();
                 // grab the form data
@@ -115,8 +112,33 @@ function getGames() {
                     "dateAdded": $('#editdateadded').val(),
                     "lastPlayed": $('#editlastalayed').val()
                 }
-                console.log(formData);
-                console.log("Form submitted");
+                
+                // debug for JSON object
+                console.log("stringified "+JSON.stringify(formData));
+                
+                // grab the ID of the game and set up the request URL
+                const updateId = $('#editgameid').val();
+                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${updateId}`;
+                
+                // update game using Fetch API PUT
+                
+                fetch(url, {
+                    method: 'put',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // adding JSON.stringify to add "" to JS object keys
+                    body: JSON.stringify(formData)})
+                    .then(function(res) {
+                        // adding toastr alert
+                        toastr.success('Game has been updated', 'Success');
+                        // alert("Game added!");
+                        // get new games list
+                        getGames();
+                        return res.json();
+                    })
+                    .catch(function(err) { console.log('Error updating game', err); });
+                                
             });
 
             // create vars for modal and cancel button
