@@ -27,13 +27,13 @@ function generateGameElement(game) {
                                     </div>
                                     <div class="modal-body">
                                         <form class="modal-form">
-                                            Title: <input type="text" value="${game.title}">
-                                            Platform: <input type="text" value="${game.platform}">
-                                            Status: <input type="text" value="${game.status}">
-                                            Comments: <input type="text" value="${game.comments}">
-                                            Date Added: <input type="text" value="${game.dateAdded}">
-                                            Last Played: <input type="text" value="${game.lastPlayed}">
-                                            <input type ="hidden" class="js-gameid hiddenid" value="${game._id}">
+                                            Title: <input type="text" id="edittitle" value="${game.title}">
+                                            Platform: <input type="text" id="editplatform" value="${game.platform}">
+                                            Status: <input type="text" id="editstatus" value="${game.status}">
+                                            Comments: <input type="text" id="editcomments" value="${game.comments}">
+                                            Date Added: <input type="text" id="editdateadded" value="${game.dateAdded}">
+                                            Last Played: <input type="text" id="editlastplayed" value="${game.lastPlayed}">
+                                            <input type ="hidden" class="js-gameid hiddenid" id="editgameid" value="${game._id}">
                                             <input type="button" value="Cancel" class="btn cancelBtn" id="cancelBtn">
                                             <input type="submit" value="Save" class="btn" id="saveBtn">
                                         </form>
@@ -102,9 +102,20 @@ function getGames() {
                 }
               });
 
-            // form event listener for modal (PUT)
+            // form event listener for modal (PUT) and update function (I'd like to take this function outside of the event listener, but I'm stumped on how to pass the unique URL with ID that is needed)
             $('.modal-form').on('submit', function(event) {
                 event.preventDefault();
+                // grab the form data
+                const formData = {
+                    "_id": $('#editgameid').val(),
+                    "title": $('#edittitle').val(),
+                    "platform": $('#editplatform').val(),
+                    "status": $('#editstatus').val(),
+                    "comments": $('#editcomments').val(),
+                    "dateAdded": $('#editdateadded').val(),
+                    "lastPlayed": $('#editlastalayed').val()
+                }
+                console.log(formData);
                 console.log("Form submitted");
             });
 
