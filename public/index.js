@@ -20,7 +20,6 @@ function generateGameElement(game) {
                                 <input type="submit" class="deletegamebutton btn" id="delete" value="Delete Game">
                             </form>
 
-                            <!-- instead of pre-loading the modal, instead use jQuery to create the modal content on unhide -->
                             <div id="editmodal-${game._id}" class="modal">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -69,18 +68,20 @@ function getGames() {
             // form event listener (for delete and edit), needs to be here as games are added to DOM
             $('.modify').on('submit', function (event) {
                 event.preventDefault();
-                // vars for delete function
+                // var to grab ID for delete function
                 let deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                // var to find closest cancel button (only one) within clicked game
                 let cancelBtn = $(this).closest('.card-content').find('.cancelBtn');
+                // var to find closest modal (only one) within clicked game
                 let modal = document.getElementById('editmodal-'+deleteId);
+                // var for URL of specific game
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
-                // grab the clicked button id
+                // grab the clicked button type (either edit or delete)
                 let id = $(document.activeElement).attr('id')
 
                 if (id == 'edit')
                 {
-                    // need to add a popup modal that takes over the screen, is prepopulated with the game info, and allows the user to PUT changes
-                    console.log("This is the edit button");
+                    console.log("ID of game is "+deleteId);
                     // listen for clicks to cancel button, and outside of modal
                     cancelBtn[0].addEventListener('click', closeModal);
                     window.addEventListener('click', clickOutside);
@@ -96,7 +97,6 @@ function getGames() {
                             modal.style.display = 'none';
                         }
                     }
-                    // pre-load modal
                     // pop up modal specific
                     modal.style.display = 'block';
                 }
@@ -118,7 +118,7 @@ function getGames() {
                 }
               });
 
-            // form event listener for modal (PUT) and update function (I'd like to take the update function outside of the event listener, but I'm stumped on how to pass the unique URL with ID that is needed)
+            // form event listener for modal (PUT) and update function
             $('.modal-form').on('submit', function(event) {
                 event.preventDefault();
                 // grab the form data
@@ -137,6 +137,7 @@ function getGames() {
                 
                 // grab the ID of the game and set up the request URL
                 const updateId = $('#editgameid').val();
+                console.log(updateId);
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${updateId}`;
                 
                 // update game using Fetch API PUT
@@ -151,19 +152,13 @@ function getGames() {
                     .then(function(res) {
                         // adding toastr alert
                         toastr.success('Game has been updated', 'Success');
-                        // alert("Game added!");
                         // get new games list
                         getGames();
                         return res.json();
                     })
-                    .catch(function(err) { console.log('Error updating game', err); });
-                                
-            });
-
-            // create vars for modal and cancel button (commenting out to try these in event listener above)
-            // var modal = document.getElementsByClassName('modal')[0];
-            // var cancelBtn = document.getElementsByClassName('cancelBtn')[0];
-                        
+                    .catch(function(err) { console.log('Error updating game', err); 
+                });                 
+            });         
        })
     }
 
