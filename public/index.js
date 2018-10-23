@@ -20,7 +20,8 @@ function generateGameElement(game) {
                                 <input type="submit" class="deletegamebutton btn" id="delete" value="Delete Game">
                             </form>
 
-                            <div id="editModal" class="modal">
+                            <!-- instead of pre-loading the modal, instead use jQuery to create the modal content on unhide -->
+                            <div id="editmodal-${game._id}" class="modal">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h2>Game Editor</h2>
@@ -34,8 +35,8 @@ function generateGameElement(game) {
                                             Date Added: <input type="text" id="editdateadded" value="${game.dateAdded}">
                                             Last Played: <input type="text" id="editlastplayed" value="${game.lastPlayed}">
                                             <input type ="hidden" class="js-gameid hiddenid" id="editgameid" value="${game._id}">
-                                            <input type="button" value="Cancel" class="btn cancelBtn" id="cancelBtn">
-                                            <input type="submit" value="Save" class="btn" id="saveBtn">
+                                            <input type="button" value="Cancel" class="btn cancelBtn">
+                                            <input type="submit" value="Save" class="btn saveBtn">
                                         </form>
                                     </div>
                                 </div>
@@ -69,8 +70,9 @@ function getGames() {
             $('.modify').on('submit', function (event) {
                 event.preventDefault();
                 // vars for delete function
-                const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
-                console.log(deleteId);
+                let deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                let cancelBtn = $(this).closest('.card-content').find('.cancelBtn');
+                let modal = document.getElementById('editmodal-'+deleteId);
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
                 // grab the clicked button id
                 let id = $(document.activeElement).attr('id')
@@ -79,7 +81,23 @@ function getGames() {
                 {
                     // need to add a popup modal that takes over the screen, is prepopulated with the game info, and allows the user to PUT changes
                     console.log("This is the edit button");
-                    // pop up modal
+                    // listen for clicks to cancel button, and outside of modal
+                    cancelBtn[0].addEventListener('click', closeModal);
+                    window.addEventListener('click', clickOutside);
+
+                    // close modal
+                    function closeModal(){
+                        modal.style.display = 'none';
+                    }
+
+                    // close modal if outside clicked
+                    function clickOutside(e){
+                        if(e.target == modal){
+                            modal.style.display = 'none';
+                        }
+                    }
+                    // pre-load modal
+                    // pop up modal specific
                     modal.style.display = 'block';
                 }
                 else {
@@ -89,6 +107,7 @@ function getGames() {
                         method: 'delete'
                         })
                         .then(function(res) {
+                           // if res.status != 200 or deleted
                             toastr.success('Game has been deleted', 'Success');
                             getGames();
                             return res.json();
@@ -141,25 +160,9 @@ function getGames() {
                                 
             });
 
-            // create vars for modal and cancel button
-            var modal = document.getElementsByClassName('modal')[0];
-            var cancelBtn = document.getElementsByClassName('cancelBtn')[0];
-
-            // listen for clicks to cancel button, and outside of modal
-            cancelBtn.addEventListener('click', closeModal);
-            window.addEventListener('click', clickOutside);
-
-            // close modal
-            function closeModal(){
-                modal.style.display = 'none';
-            }
-
-            // close modal if outside clicked
-            function clickOutside(e){
-                if(e.target == modal){
-                    modal.style.display = 'none';
-                }
-            }
+            // create vars for modal and cancel button (commenting out to try these in event listener above)
+            // var modal = document.getElementsByClassName('modal')[0];
+            // var cancelBtn = document.getElementsByClassName('cancelBtn')[0];
                         
        })
     }
