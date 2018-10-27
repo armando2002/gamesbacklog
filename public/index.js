@@ -26,7 +26,7 @@ function generateGameElement(game) {
                                         <h2>Game Editor</h2>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="modal-form">
+                                        <form class="modal-form-${game._id}">
                                             Title: <input type="text" id="edittitle" value="${game.title}">
                                             Platform: <input type="text" id="editplatform" value="${game.platform}">
                                             Status: <input type="text" id="editstatus" value="${game.status}">
@@ -119,8 +119,10 @@ function getGames() {
               });
 
             // form event listener for modal (PUT) and update function
-            $('.modal-form').on('submit', function(event) {
+            // need to set up a unique id for the event listerer and hope it works, otherwise need to set unique IDs for each item in the form object
+            $(`.modal-form`).on('submit', function(event) {
                 event.preventDefault();
+                // debugger;
                 // grab the form data
                 const formData = {
                     "_id": $('#editgameid').val(),
@@ -203,3 +205,6 @@ function addGameButton() {
 /* add init function for listeners */
 $(getGames);
 $(addGameButton);
+
+// after getGames() is loaded then load the rest of the functions in document.ready
+// look up iife for understanding how page loading/binding elements and document.ready work
