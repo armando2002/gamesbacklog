@@ -1,10 +1,5 @@
-// create an element based off the game
+// create an element based off the game, including the modal for editing game
 function generateGameElement(game) {
-    // debug for game ID
-    /* var idType = typeof $(game._id);
-    console.log("ID is a " + idType);
-    console.log(`${game._id}`);
-    console.log($(game._id)); */
     return `
     <li>
                     <div class="card">
@@ -17,7 +12,35 @@ function generateGameElement(game) {
                             <p>Date Added: ${game.dateAdded}</p>
                             <p>Last Played: ${game.lastPlayed}</p>
                             <p class="js-gameid hiddenid">${game._id}</p>
-                            <p><button type="button" class="deletegamebutton btn">Delete Game</button></p>
+
+                            <form class="modify">
+                                <input type="hidden" name="id" value="${game._id}">
+                                <input type="hidden" name="title" value="${game.title}">
+                                <input type="submit" class="editgamebutton btn" id="edit" value="Edit Game">
+                                <input type="submit" class="deletegamebutton btn" id="delete" value="Delete Game">
+                            </form>
+
+                            <div id="editmodal-${game._id}" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2>Game Editor</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="modal-form">
+                                            Title: <input type="text" class="edittitle" value="${game.title}">
+                                            Platform: <input type="text" class="editplatform" value="${game.platform}">
+                                            Status: <input type="text" class="editstatus" value="${game.status}">
+                                            Comments: <input type="text" class="editcomments" value="${game.comments}">
+                                            Date Added: <input type="text" class="editdateadded" value="${game.dateAdded}">
+                                            Last Played: <input type="text" class="editlastplayed" value="${game.lastPlayed}">
+                                            <input type ="hidden" class="js-gameid hiddenid" class="editgameid" value="${game._id}">
+                                            <input type="button" value="Cancel" class="btn cancelBtn">
+                                            <input type="submit" value="Save" class="btn saveBtn">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </li>
@@ -33,39 +56,112 @@ function generateGamesList(game) {
     });
 }
 
-
-
-
 // gather list of games from API and then call generateGamesList function
 function getGames() {
     let url = 'https://limitless-tor-81099.herokuapp.com/gamesapi';
     fetch(url)
     .then((resp) => resp.json())
     .then(function(data) {
-          // debug
-          //  console.log("list of games from fetch = "+ data);
-            generateGamesList(data);
-            // event listener for delete game button
-            $(".deletegamebutton").on("click", function() {
 
-                // delete game using Fetch
-                const deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+            generateGamesList(data);
+
+            // form event listener (for delete and edit), needs to be here as games are added to DOM
+            $('.modify').on('submit', function (event) {
+                event.preventDefault();
+                // var to grab ID for delete function
+                let deleteId = $(this).closest('.card-content').find('.js-gameid').text();
+                // var to find closest cancel button (only one) within clicked game
+                let cancelBtn = $(this).closest('.card-content').find('.cancelBtn');
+                // var to find closest modal (only one) within clicked game
+                let modal = document.getElementById('editmodal-'+deleteId);
+                // var for URL of specific game
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${deleteId}`;
-                fetch(url, {
-                    method: 'delete'
+                // grab the clicked button type (either edit or delete)
+                let id = $(document.activeElement).attr('id')
+
+                if (id == 'edit')
+                {
+                    console.log("ID of game is "+deleteId);
+                    // listen for clicks to cancel button, and outside of modal
+                    cancelBtn[0].addEventListener('click', closeModal);
+                    window.addEventListener('click', clickOutside);
+
+                    // close modal
+                    function closeModal(){
+                        modal.style.display = 'none';
+                    }
+
+                    // close modal if outside clicked
+                    function clickOutside(e){
+                        if(e.target == modal){
+                            modal.style.display = 'none';
+                        }
+                    }
+                    // pop up modal specific
+                    modal.style.display = 'block';
+                }
+                else {
+                    // delete game using Fetch
+                    // doesn't seem to throw the catch if there's an error
+                    fetch(url, {
+                        method: 'delete'
+                        })
+                        .then(function(res) {
+                           // if res.status != 200 or deleted
+                            toastr.success('Game has been deleted', 'Success');
+                            getGames();
+                            return res.json();
+                        })
+                        .catch(function(err) { 
+                            console.log('Error deleting game', err); 
                     })
+                }
+              });
+
+            // form event listener for modal (PUT) and update function
+            // need to set up a unique id for the event listerer and hope it works, otherwise need to set unique IDs for each item in the form object
+            $(`.modal-form`).on('submit', function(event) {
+                event.preventDefault();
+                // debugger;
+                // grab the form data, I'm wondering if find closest would work
+                const formData = {
+                    "_id": $(this).closest('.modal-body').find(':hidden').val(),
+                    "title": $(this).closest('.modal-body').find('.edittitle').val(),
+                    "platform": $(this).closest('.modal-body').find('.editplatform').val(),
+                    "status": $(this).closest('.modal-body').find('.editstatus').val(),
+                    "comments": $(this).closest('.modal-body').find('.editcomments').val(),
+                    "dateAdded": $(this).closest('.modal-body').find('.editdateadded').val(),
+                    "lastPlayed": $(this).closest('.modal-body').find('.editlastplayed').val()
+                }
+                
+                // debug for JSON object
+                console.log("stringified "+JSON.stringify(formData));
+                
+                // grab the ID of the game and set up the request URL
+                const updateId = $(this).closest('.modal-body').find(':hidden').val();
+                console.log(updateId);
+                let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${updateId}`;
+                
+                // update game using Fetch API PUT
+                
+                fetch(url, {
+                    method: 'put',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // adding JSON.stringify to add "" to JS object keys
+                    body: JSON.stringify(formData)})
                     .then(function(res) {
-                        toastr.success('Game has been deleted', 'Success');
+                        // adding toastr alert
+                        toastr.success('Game has been updated', 'Success');
+                        // get new games list
                         getGames();
                         return res.json();
                     })
-                    .catch(function(err) { 
-                        console.log('Error deleting game', err); 
-                    })
-                
-            });
-            
-        })
+                    .catch(function(err) { console.log('Error updating game', err); 
+                });                 
+            });         
+       })
     }
 
 // add game from form
@@ -109,3 +205,6 @@ function addGameButton() {
 /* add init function for listeners */
 $(getGames);
 $(addGameButton);
+
+// after getGames() is loaded then load the rest of the functions in document.ready
+// look up iife for understanding how page loading/binding elements and document.ready work
