@@ -22,6 +22,11 @@ h1, h2, h3 {
     padding: 1em 0;
 }
 
+/* all input fields are full width */
+input {
+    width: 100%;
+}
+
 /* for paragraphs, zero out margin and add 1 em of padding on top and bottom and 0 on left and right */
 p {
     margin: 0;
@@ -117,6 +122,22 @@ p {
     background: white;
     color: #232323;
     padding: 2em;
+}
+
+/* Add Game Form */
+#addgameform {
+    border: solid 2px black;
+    background: gray;
+    padding: 0em 2em 0em 2em;
+    width: 70%;
+    justify-content: center;
+    margin: auto;
+}
+
+/* add game button */
+addgame {
+    vertical-align: bottom;
+    margin-bottom: 1em;
 }
 
 /* Section D Boxes */
