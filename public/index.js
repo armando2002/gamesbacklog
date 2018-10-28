@@ -26,14 +26,14 @@ function generateGameElement(game) {
                                         <h2>Game Editor</h2>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="modal-form-${game._id}">
-                                            Title: <input type="text" id="edittitle" value="${game.title}">
-                                            Platform: <input type="text" id="editplatform" value="${game.platform}">
-                                            Status: <input type="text" id="editstatus" value="${game.status}">
-                                            Comments: <input type="text" id="editcomments" value="${game.comments}">
-                                            Date Added: <input type="text" id="editdateadded" value="${game.dateAdded}">
-                                            Last Played: <input type="text" id="editlastplayed" value="${game.lastPlayed}">
-                                            <input type ="hidden" class="js-gameid hiddenid" id="editgameid" value="${game._id}">
+                                        <form class="modal-form">
+                                            Title: <input type="text" class="edittitle" value="${game.title}">
+                                            Platform: <input type="text" class="editplatform" value="${game.platform}">
+                                            Status: <input type="text" class="editstatus" value="${game.status}">
+                                            Comments: <input type="text" class="editcomments" value="${game.comments}">
+                                            Date Added: <input type="text" class="editdateadded" value="${game.dateAdded}">
+                                            Last Played: <input type="text" class="editlastplayed" value="${game.lastPlayed}">
+                                            <input type ="hidden" class="js-gameid hiddenid" class="editgameid" value="${game._id}">
                                             <input type="button" value="Cancel" class="btn cancelBtn">
                                             <input type="submit" value="Save" class="btn saveBtn">
                                         </form>
@@ -123,22 +123,22 @@ function getGames() {
             $(`.modal-form`).on('submit', function(event) {
                 event.preventDefault();
                 // debugger;
-                // grab the form data
+                // grab the form data, I'm wondering if find closest would work
                 const formData = {
-                    "_id": $('#editgameid').val(),
-                    "title": $('#edittitle').val(),
-                    "platform": $('#editplatform').val(),
-                    "status": $('#editstatus').val(),
-                    "comments": $('#editcomments').val(),
-                    "dateAdded": $('#editdateadded').val(),
-                    "lastPlayed": $('#editlastalayed').val()
+                    "_id": $(this).closest('.modal-body').find(':hidden').val(),
+                    "title": $(this).closest('.modal-body').find('.edittitle').val(),
+                    "platform": $(this).closest('.modal-body').find('.editplatform').val(),
+                    "status": $(this).closest('.modal-body').find('.editstatus').val(),
+                    "comments": $(this).closest('.modal-body').find('.editcomments').val(),
+                    "dateAdded": $(this).closest('.modal-body').find('.editdateadded').val(),
+                    "lastPlayed": $(this).closest('.modal-body').find('.editlastplayed').val()
                 }
                 
                 // debug for JSON object
                 console.log("stringified "+JSON.stringify(formData));
                 
                 // grab the ID of the game and set up the request URL
-                const updateId = $('#editgameid').val();
+                const updateId = $(this).closest('.modal-body').find(':hidden').val();
                 console.log(updateId);
                 let url = `https://limitless-tor-81099.herokuapp.com/gamesapi/${updateId}`;
                 
